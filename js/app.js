@@ -10,14 +10,6 @@ const zombies = {
   background: undefined,
   player: undefined,
   obstacles: [],
-
-  keys: {
-    TOP: 38,
-    Right: 39,
-    Left: 37,
-    Down: 40,
-    SPACE: 32,
-  },
   startGame() {
     this.started = true;
   },

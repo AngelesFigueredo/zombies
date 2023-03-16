@@ -3,15 +3,18 @@ class Game {
     this.ctx = ctx,
       this.canvasHeight = canvasHeight,
       this.canvasWidth = canvasWidth
+      this.info = [this.ctx, this.canvasHeight, this.canvasWidth];
       this.background = undefined
       this.init()
   }
   init(){
-    this.background = new Background(this.ctx, this.height, this.width);
+    this.background = new Background(...this.info);
+    this.playerImage = new Player(...this.info)
   }
   draw(){
     this.background.draw()
-    console.log('hola')
+    this.playerImage.draw()
+   
   }
 
 }
