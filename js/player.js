@@ -3,15 +3,14 @@ class Player {
     (this.ctx = ctx),
       (this.canvasHeight = canvasHeight),
       (this.canvasWidth = canvasWidth),
-      (this.playerImage = undefined);
+      (this.info = [this.ctx, this.canvasHeight, this.canvasWidth]);
     this.size = {
       w: 100,
-      h: 200,
+      h: 100,
     };
-    this.health = 100, 
-    this.bullets = []
-    this.direction = "down",
-    (this.posX = this.canvasWidth / 2 - this.size.w / 2),
+    (this.health = 100), (this.bullets = []);
+    (this.direction = "down"),
+      (this.posX = this.canvasWidth / 2 - this.size.w / 2),
       (this.posY = this.canvasHeight / 2 - this.size.h / 2),
       (this.key = {
         up: 38,
@@ -46,34 +45,52 @@ class Player {
     } else if (this.direction === "up") {
       this.drawSprite("up");
     }
-
+    this.bullets.forEach((bullet) => {
+      bullet.draw();
+    });
+    this.clearBullets();
+  }
+  shoot() {
+    this.bullets.push(
+      new Bullets(...this.info, this.posX, this.posY, this.size, this.direction)
+    );
+  }
+  clearBullets() {
+    this.bullets = this.bullets.filter((bullet) => {
+      if (bullet.posXY.x >= this.canvasWidth) {
+        return false;
+      } else if (bullet.posXY.y >= this.canvasHeight) {
+        return false;
+      } else if (bullet.posXY.x <= 0) {
+        return false;
+      } else if (bullet.posXY.y<= 0) {
+        return false;
+      }
+      return true;
+    });
   }
   drawSprite(imageName) {
-      let width = this.size.w
-      let height = this.size.h;
-    if (imageName === "left" || imageName === "right"){
-        width = this.size.h
-        height = this.size.w;
+    let width = this.size.w;
+    let height = this.size.h;
+    if (imageName === "left" || imageName === "right") {
+      width = this.size.h;
+      height = this.size.w;
     }
-      this.ctx.drawImage(
-        this[imageName],
-        this.posX,
-        this.posY,
-        width,
-        height
-      );
+    this.ctx.drawImage(this[imageName], this.posX, this.posY, width, height);
   }
   listen() {
     document.addEventListener("keydown", (e) => {
       console.log(e.keyCode);
-      if(e.keyCode === this.key.up){
+      if (e.keyCode === this.key.up) {
         this.direction = "up";
-      } else if(e.keyCode === this.key.down){
-        this.direction ="down"
-      }else if(e.keyCode === this.key.left){
-        this.direction = "left"
-      }else if(e.keyCode === this.key.right){
-        this.direction = "right"
+      } else if (e.keyCode === this.key.down) {
+        this.direction = "down";
+      } else if (e.keyCode === this.key.left) {
+        this.direction = "left";
+      } else if (e.keyCode === this.key.right) {
+        this.direction = "right";
+      } else if (e.keyCode === this.key.space) {
+        this.shoot();
       }
     });
   }
