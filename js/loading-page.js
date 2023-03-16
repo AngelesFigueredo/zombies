@@ -1,0 +1,26 @@
+class LoadingPage {
+  constructor(ctx, canvasHeight, canvasWidth, onClick) {
+    this.ctx = ctx;
+    this.onClick = onClick;
+    this.canvasHeight = canvasHeight;
+    this.canvasWidth = canvasWidth;
+    this.image = undefined;
+    this.init();
+  }
+  init() {
+    this.createLoadingPage();
+    this.listen();
+  }
+  createLoadingPage() {
+    this.image = new Image();
+    this.image.src = "img/pantalla-de-inicio.jpg";
+  }
+  draw() {
+    this.ctx.drawImage(this.image, 0, 0, this.canvasWidth, this.canvasHeight);
+  }
+  listen() {
+    document.addEventListener("click", () => {
+        this.onClick();
+    });
+  }
+}
