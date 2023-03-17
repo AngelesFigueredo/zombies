@@ -8,10 +8,13 @@ class Player {
       w: 100,
       h: 100,
     };
-    (this.health = 100), (this.bullets = []);
-    (this.direction = "down"),
-      (this.posX = this.canvasWidth / 2 - this.size.w / 2),
-      (this.posY = this.canvasHeight / 2 - this.size.h / 2),
+    (this.health = 100),
+      (this.bullets = []),
+      (this.direction = "down"),
+      (this.posXY = {
+        x: this.canvasWidth / 2 - this.size.w / 2,
+        y: this.canvasHeight / 2 - this.size.h / 2,
+      }),
       (this.key = {
         up: 38,
         down: 40,
@@ -52,7 +55,7 @@ class Player {
   }
   shoot() {
     this.bullets.push(
-      new Bullets(...this.info, this.posX, this.posY, this.size, this.direction)
+      new Bullets(...this.info, this.posXY.x, this.posXY.y, this.size, this.direction)
     );
   }
   clearBullets() {
@@ -63,7 +66,7 @@ class Player {
         return false;
       } else if (bullet.posXY.x <= 0) {
         return false;
-      } else if (bullet.posXY.y<= 0) {
+      } else if (bullet.posXY.y <= 0) {
         return false;
       }
       return true;
@@ -76,7 +79,7 @@ class Player {
       width = this.size.h;
       height = this.size.w;
     }
-    this.ctx.drawImage(this[imageName], this.posX, this.posY, width, height);
+    this.ctx.drawImage(this[imageName], this.posXY.x, this.posXY.y, width, height);
   }
   listen() {
     document.addEventListener("keydown", (e) => {
