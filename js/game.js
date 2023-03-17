@@ -18,11 +18,17 @@ class Game {
     ++ this.frameCounter
     this.background.draw()
     this.playerImage.draw()
-    this.zombie.draw()
-   
+    if(this.frameCounter === 60){
+      this.createZombie()
+      this.frameCounter = 0
+    }
+   this.zombies.forEach((zombie)=>{
+    zombie.draw()
+   })
   }
   createZombie(){
-    this.zombie = new Zombie(...this.info, "right")
+     this.zombies.push(new Zombie(...this.info))
   }
+  
 
 }

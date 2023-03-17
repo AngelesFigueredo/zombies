@@ -1,10 +1,10 @@
 class Zombie {
-  constructor(ctx, canvasHeight, canvasWidth, direction) {
+  constructor(ctx, canvasHeight, canvasWidth) {
     this.ctx = ctx,
     this.canvasHeight = canvasHeight,
     this.canvasWidth = canvasWidth,
-    this.direction = direction
-    //Direction should be "up", "down", "left" or "right"
+    this.direction = undefined
+    this.randomDirection = ["up", "down", "left", "right"]
     this.size = {
         w: 100,
         h: 100,
@@ -13,13 +13,16 @@ class Zombie {
         x: -this.size.w/2, 
         y: - this.size.h/2
     }
+    this.vel = 2
     this.init()
-  }
-  init() {
-    this.decidePos()
-    this.createImage(this.direction)
 
   }
+  init() {
+    this.decideDirection()
+    this.decidePos()
+    this.createImage(this.direction)
+  }
+  
   createImage(imageName) {
     this[imageName] = new Image();
     if (this.direction === "up") {
@@ -38,6 +41,7 @@ class Zombie {
   }
   draw(){
     this.drawSprite(this.direction)
+    this.move()
   }
   decidePos(){
     if (this.direction === "up" || this.direction === "down") {
@@ -54,5 +58,20 @@ class Zombie {
     } else if(this.direction === "right"){
         this.posXY.x += this.canvasWidth - (this.size.h/2)
     }
+  }
+  move(){
+    if(this.direction === "right"){
+      this.posXY.x -= this.vel
+    }else if(this.direction === "left"){
+      this.posXY.x += this.vel
+    }else if(this.direction === "up"){
+      this.posXY.y += this.vel
+    }else{
+      this.posXY.y -= this.vel
+    }
+  }
+  decideDirection(){
+    const randomNumber = Math.floor(Math.random() * this.randomDirection.length);
+    this.direction = this.randomDirection[randomNumber];
   }
 }
