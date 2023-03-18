@@ -26,13 +26,15 @@ const zombies = {
       this.startGame.bind(this)
     );
     this.game = new Game(this.ctx, this.height, this.width, this.gameOver);
+    this.createGameOverImage();
+    
   },
 
   setDimensions() {
-    this.width = window.innerWidth;
+    this.width = window.innerWidth ;
     this.height = window.innerHeight;
-    this.canvas.width = this.width;
-    this.canvas.height = this.height;
+    this.canvas.width = this.width -20;
+    this.canvas.height = this.height -20;
   },
   start() {
     setInterval(() => {
@@ -51,7 +53,19 @@ const zombies = {
       this.game.draw()
     }
     if(this.game.gameOver){
-      window.alert("HAS MUERTO")
+      this.showGameOver()
+      document.addEventListener("click", ()=> {this.reset()}, {once : true})
     }
   },
+  showGameOver(){
+    this.ctx.drawImage(this.gameOverImage, 0, 0, this.width, this.height);
+  },
+  createGameOverImage() {
+    this.gameOverImage = new Image();
+    this.gameOverImage.src = "img/game-over.jpg";
+  },
+
+  reset(){
+    this.game = new Game(this.ctx, this.height, this.width, this.gameOver);
+  }
 };

@@ -15,7 +15,7 @@ class Player {
         x: this.canvasWidth / 2 - this.size.w / 2,
         y: this.canvasHeight / 2 - this.size.h / 2,
       },
-    this.sprite= {
+    this.sprite = {
       posXY : {
         x: this.canvasWidth / 2 - this.size.w / 2,
         y: this.canvasHeight / 2 - this.size.h / 2 +20
@@ -49,7 +49,7 @@ class Player {
     this[imageName].src = imagePath;
   }
   draw() {
-    this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
+    // this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
     if (this.direction === "down") {
       this.drawSprite("down");
     } else if (this.direction === "left") {

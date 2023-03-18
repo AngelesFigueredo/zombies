@@ -16,9 +16,7 @@ class Game {
     this.player = new Player(...this.info);
     this.createZombie();
   }
-  draw() {
-    console.log(this.score)
-    
+  draw() {    
     ++this.frameCounter;
     this.background.draw();
     this.player.draw();
