@@ -1,27 +1,37 @@
 class Player {
   constructor(ctx, canvasHeight, canvasWidth) {
-    (this.ctx = ctx),
-      (this.canvasHeight = canvasHeight),
-      (this.canvasWidth = canvasWidth),
-      (this.info = [this.ctx, this.canvasHeight, this.canvasWidth]);
+    this.ctx = ctx,
+    this.canvasHeight = canvasHeight,
+    this.canvasWidth = canvasWidth,
+    this.info = [this.ctx, this.canvasHeight, this.canvasWidth],
     this.size = {
       w: 100,
       h: 100,
-    };
-    (this.health = 100),
-      (this.bullets = []),
-      (this.direction = "down"),
-      (this.posXY = {
+    },
+    this.health = 100,
+    this.bullets = [],
+    this.direction = "down",
+    this.posXY = {
         x: this.canvasWidth / 2 - this.size.w / 2,
         y: this.canvasHeight / 2 - this.size.h / 2,
-      }),
-      (this.key = {
+      },
+    this.sprite= {
+      posXY : {
+        x: this.canvasWidth / 2 - this.size.w / 2,
+        y: this.canvasHeight / 2 - this.size.h / 2 +20
+      }, 
+      size: {
+      w: 100,
+      h: 100,
+    }
+    }
+    this.key = {
         up: 38,
         down: 40,
         left: 37,
         right: 39,
         space: 32,
-      });
+      },
     this.init();
   }
   init() {
@@ -39,6 +49,7 @@ class Player {
     this[imageName].src = imagePath;
   }
   draw() {
+    this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
     if (this.direction === "down") {
       this.drawSprite("down");
     } else if (this.direction === "left") {
@@ -55,7 +66,7 @@ class Player {
   }
   shoot() {
     this.bullets.push(
-      new Bullets(...this.info, this.posXY.x, this.posXY.y, this.size, this.direction)
+      new Bullets(...this.info, this.sprite, this.direction)
     );
   }
   clearBullets() {

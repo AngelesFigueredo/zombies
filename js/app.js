@@ -6,7 +6,7 @@ const zombies = {
   height: undefined,
   FPS: 60,
   framesCounter: 0,
-
+  gameOver: false,
   background: undefined,
   player: undefined,
   obstacles: [],
@@ -25,7 +25,7 @@ const zombies = {
       this.width,
       this.startGame.bind(this)
     );
-    this.game = new Game(this.ctx, this.height, this.width);
+    this.game = new Game(this.ctx, this.height, this.width, this.gameOver);
   },
 
   setDimensions() {
@@ -49,6 +49,9 @@ const zombies = {
       this.LoadingPage.draw();
     }else{
       this.game.draw()
+    }
+    if(this.game.gameOver){
+      window.alert("HAS MUERTO")
     }
   },
 };
