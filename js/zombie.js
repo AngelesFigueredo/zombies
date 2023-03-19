@@ -4,6 +4,7 @@ class Zombie {
     this.canvasHeight = canvasHeight,
     this.canvasWidth = canvasWidth,
     this.direction = undefined,
+    this.framesCounter = 0,
     this.randomDirection = ["up", "down", "left", "right"],
     this.size = {
         w: 100,
@@ -47,12 +48,28 @@ class Zombie {
     } else if (this.direction === "right") {
       this[imageName].src = " img/zombie/zombie_right.png";
     }
+    this[imageName].frames = 6;
+    this[imageName].framesIndex = 0;
 
   }
   drawSprite(imageName) {
-    this.ctx.drawImage(this[imageName], this.posXY.x, this.posXY.y, this.size.w, this.size.h);
+    // this.ctx.drawImage(this[imageName], this.posXY.x, this.posXY.y, this.size.w, this.size.h);
+     this.ctx.drawImage(
+      this[imageName],
+      (this[imageName].width / this[imageName].frames) * this[imageName].framesIndex,
+      0,
+      this[imageName].width / this[imageName].frames,
+      this[imageName].height,
+      this.posXY.x,
+      this.posXY.y,
+      this.size.w,
+      this.size.h
+    );
+    this.animateImage(this.framesCounter, this[imageName], 5)
   }
   draw(){
+    this.framesCounter ++
+    this.resetFramesCounter()
     // this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
     this.drawSprite(this.direction)
     this.move()
@@ -116,4 +133,16 @@ class Zombie {
     const randomNumber = Math.floor(Math.random() * this.randomDirection.length);
     this.direction = this.randomDirection[randomNumber];   
   }
+  resetFramesCounter(){
+    this.framesCounter > 1000 ? (this.framesCounter = 0) : this.framesCounter++
+  }
+  animateImage(framesCounter, image, speed) {
+    if (framesCounter % speed === 0) {
+      image.framesIndex++;
+    }
+    if (image.framesIndex >= image.frames) {
+      image.framesIndex = 0;
+    }
+  }
+  
 }

@@ -15,6 +15,7 @@ class Game {
     this.background = new Background(...this.info);
     this.player = new Player(...this.info);
     this.createZombie();
+    this.createScoreboard()
   }
   draw() {    
     ++this.frameCounter;
@@ -68,7 +69,17 @@ class Game {
     this.score+= 10
   }
   drawScoreboard(){
-    this.ctx.font = "35px serif";
-    this.ctx.fillText(`Your score: ${this.score}`, 50, 50)
+    this.drawScoreBar()
+    this.ctx.fillStyle = 'white'
+    this.ctx.font = "20px sans-serif";
+    this.ctx.fillText(`Your score: ${this.score}`, 60, 50)
+    this.ctx.fillStyle = 'black'
+  }
+  createScoreboard(){
+    this.scoreBar = new Image()
+    this.scoreBar.src = "img/score-bar.png"
+  }
+  drawScoreBar(){
+    this.ctx.drawImage(this.scoreBar, 5, 5, 350, 75)
   }
 }

@@ -11,7 +11,7 @@ class Background {
     }
     create(){
         this.background = new Image()
-        this.background.src = "img/background.jpg"
+        this.background.src = "img/background.png"
     }
     draw(){
         this.ctx.drawImage(
