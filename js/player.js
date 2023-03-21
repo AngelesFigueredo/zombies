@@ -5,20 +5,20 @@ class Player {
     this.canvasWidth = canvasWidth,
     this.info = [this.ctx, this.canvasHeight, this.canvasWidth],
     this.size = {
-      w: 100,
-      h: 100,
+      w: 200,
+      h: 200,
     },
-    this.health = 100,
+    this.framesCounter = 0
     this.bullets = [],
     this.direction = "down",
     this.posXY = {
-        x: this.canvasWidth / 2 - this.size.w / 2,
+        x: this.canvasWidth / 2 - this.size.w / 2 ,
         y: this.canvasHeight / 2 - this.size.h / 2,
       },
     this.sprite = {
       posXY : {
-        x: this.canvasWidth / 2 - this.size.w / 2,
-        y: this.canvasHeight / 2 - this.size.h / 2 +20
+        x: this.canvasWidth / 2 - this.size.w / 2 +55,
+        y: this.canvasHeight / 2 - this.size.h / 2 + 50
       }, 
       size: {
       w: 100,
@@ -49,7 +49,7 @@ class Player {
     this[imageName].src = imagePath;
   }
   draw() {
-    // this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
+     this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
     if (this.direction === "down") {
       this.drawSprite("down");
     } else if (this.direction === "left") {
@@ -107,5 +107,37 @@ class Player {
         this.shoot();
       }
     });
+  }
+
+  // ninguna de las líneas de aquí para abajo se han implementado, tienen como objetivo
+  // que en el futuro se anime cuando dispare el jugador 
+  // habría que poner un temporizador para que aparezca animación
+  // asimismo queremos que tenga un "cooldown" entre disparos por lo que
+  // habría que poner otro counter. Las animaciones del jugador 
+  //dispando están en la carpeta "img/main-character/shooting"
+  drawAnimatedSprite(imageName) {
+    this.animateImage(this.framesCounter, this[imageName], 5)
+     this.ctx.drawImage(
+      this[imageName],
+      (this[imageName].width / this[imageName].frames) * this[imageName].framesIndex,
+      0,
+      this[imageName].width / this[imageName].frames,
+      this[imageName].height,
+      this.posXY.x,
+      this.posXY.y,
+      this.dimension.w,
+      this.dimension.h
+    );
+  }
+  resetFramesCounter(){
+    this.framesCounter > 1000 ? (this.framesCounter = 0) : this.framesCounter++
+  }
+  animateImage(framesCounter, image, speed) {
+    if (framesCounter % speed === 0) {
+      image.framesIndex++;
+    }
+    if (image.framesIndex >= image.frames) {
+      image.framesIndex = 0;
+    }
   }
 }

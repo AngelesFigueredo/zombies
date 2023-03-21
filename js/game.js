@@ -72,7 +72,7 @@ class Game {
     this.drawScoreBar()
     this.ctx.fillStyle = 'white'
     this.ctx.font = "20px sans-serif";
-    this.ctx.fillText(`Your score: ${this.score}`, 60, 50)
+    this.ctx.fillText(`Your score: ${this.score}`, 100, 50)
     this.ctx.fillStyle = 'black'
   }
   createScoreboard(){

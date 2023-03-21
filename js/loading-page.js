@@ -13,7 +13,7 @@ class LoadingPage {
   }
   createLoadingPage() {
     this.image = new Image();
-    this.image.src = "img/pantalla-de-inicio.jpg";
+    this.image.src = "img/pantalla-de-inicio.png";
   }
   draw() {
     this.ctx.drawImage(this.image, 0, 0, this.canvasWidth, this.canvasHeight);

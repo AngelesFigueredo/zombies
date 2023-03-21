@@ -5,13 +5,14 @@ class Bullets{
         this.canvasWidth = canvasWidth
         this.playerSprite = playerSpriteObj
         this.playerDirection = playerDirection
+        this.framesCounter = 0
         this.posXY = {
           x: undefined,
           y: undefined,
         };
         this.dimension = {
-            w : 10,
-            h: 10
+            w : 50,
+            h: 50
         },
         this.sprite = {
             posXY: {
@@ -29,23 +30,60 @@ class Bullets{
     }
     init(){
         this.decidePos()
-        this.create()
+        this.create("hola")
     }
-    create(){
-        //this will work when we have a sprite defined
+    create(imageName){
+        this[imageName] = new Image();
+        this[imageName].src = "img/bullet.png";
+    // if (this.direction === "up") {
+    //   this[imageName].src = "img/zombie/zombie_up.png";
+    // } else if (this.direction === "down") {
+    //   this[imageName].src = " img/zombie/zombie_down.png";
+    // } else if (this.direction === "left") {
+    //   this[imageName].src = " img/zombie/zombie_left.png";
+    // } else if (this.direction === "right") {
+    //   this[imageName].src = " img/zombie/zombie_right.png";
+    // }
+    this[imageName].frames = 4;
+    this[imageName].framesIndex = 0;
     }
     draw(){
-        
-        this.move()
-        this.ctx.fillStyle = 'red'
+        this.ctx.fillStyle = 'black'
         this.ctx.fillRect(
           this.posXY.x ,
           this.posXY.y , 
           this.dimension.w, 
           this.dimension.h,
         );
-        this.ctx.fillStyle = 'black'
+        this.resetFramesCounter()
+        this.move()
+        this.drawSprite("hola")
     }
+    drawSprite(imageName) {
+    this.animateImage(this.framesCounter, this[imageName], 5)
+     this.ctx.drawImage(
+      this[imageName],
+      (this[imageName].width / this[imageName].frames) * this[imageName].framesIndex,
+      0,
+      this[imageName].width / this[imageName].frames,
+      this[imageName].height,
+      this.posXY.x,
+      this.posXY.y,
+      this.dimension.w,
+      this.dimension.h
+    );
+  }
+  resetFramesCounter(){
+    this.framesCounter > 1000 ? (this.framesCounter = 0) : this.framesCounter++
+  }
+  animateImage(framesCounter, image, speed) {
+    if (framesCounter % speed === 0) {
+      image.framesIndex++;
+    }
+    if (image.framesIndex >= image.frames) {
+      image.framesIndex = 0;
+    }
+  }
     
     move(){
         if(this.playerDirection === "down"){

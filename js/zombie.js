@@ -50,10 +50,10 @@ class Zombie {
     }
     this[imageName].frames = 6;
     this[imageName].framesIndex = 0;
-
+    
   }
   drawSprite(imageName) {
-    // this.ctx.drawImage(this[imageName], this.posXY.x, this.posXY.y, this.size.w, this.size.h);
+    this.animateImage(this.framesCounter, this[imageName], 5)
      this.ctx.drawImage(
       this[imageName],
       (this[imageName].width / this[imageName].frames) * this[imageName].framesIndex,
@@ -65,7 +65,6 @@ class Zombie {
       this.size.w,
       this.size.h
     );
-    this.animateImage(this.framesCounter, this[imageName], 5)
   }
   draw(){
     this.framesCounter ++
