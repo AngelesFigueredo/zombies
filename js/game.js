@@ -78,7 +78,7 @@ class Game {
     this.drawScoreBar()
     this.ctx.fillStyle = 'white'
     this.ctx.font = "20px sans-serif";
-    this.ctx.fillText(`Your score: ${this.score} wave ${this.waveCounter}`, 100, 50)
+    this.ctx.fillText(`Your score: ${this.score} Wave: ${this.waveCounter}`, 100, 50)
     this.ctx.fillStyle = 'black'
   }
   createScoreboard(){
@@ -86,13 +86,11 @@ class Game {
     this.scoreBar.src = "img/score-bar.png"
   }
   drawScoreBar(){
-    this.ctx.drawImage(this.scoreBar, 5, 5, 350, 75)
+    this.ctx.drawImage(this.scoreBar, 5, 5, 400, 75)
   }
   goToNextWave(){
     if(this.zombiesKilled === this.killsIncrease){
-      if(this.seconds > 40){
-        this.seconds -= 30 
-      }
+      this.seconds > 40 ? this.seconds -= 30 : null
       this.waveCounter ++
       this.zombiesKilled = 0
       this.killsIncrease += 3

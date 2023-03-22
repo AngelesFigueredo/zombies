@@ -11,13 +11,17 @@ class Player {
     this.framesCounter = 0
     this.bullets = [],
     this.direction = "down",
+    this.shooting = false
+    this.shootingTime = 30
+    this.bulletsFramesCounter = 30
+    this.shootingTimeCounter = 0
     this.posXY = {
         x: this.canvasWidth / 2 - this.size.w / 2 ,
         y: this.canvasHeight / 2 - this.size.h / 2,
       },
     this.sprite = {
       posXY : {
-        x: this.canvasWidth / 2 - this.size.w / 2 +55,
+        x: this.canvasWidth / 2 - this.size.w / 2 + 55,
         y: this.canvasHeight / 2 - this.size.h / 2 + 50
       }, 
       size: {
@@ -43,31 +47,55 @@ class Player {
     this.createImage("down", "img/main-character/gun_down.png");
     this.createImage("left", "img/main-character/gun_left.png");
     this.createImage("right", "img/main-character/gun_right.png");
+    this.createAnimatedImage("shootingUp", "img/main-character/shooting/up.png", 4)
+    this.createAnimatedImage("shootingDown", "img/main-character/shooting/down.png", 4)
+    this.createAnimatedImage("shootingLeft", "img/main-character/shooting/left.png", 4)
+    this.createAnimatedImage("shootingRight", "img/main-character/shooting/right.png", 4)
   }
   createImage(imageName, imagePath) {
     this[imageName] = new Image();
     this[imageName].src = imagePath;
   }
-  draw() {
-     this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
-    if (this.direction === "down") {
-      this.drawSprite("down");
-    } else if (this.direction === "left") {
-      this.drawSprite("left");
-    } else if (this.direction === "right") {
-      this.drawSprite("right");
-    } else if (this.direction === "up") {
-      this.drawSprite("up");
-    }
-    this.bullets.forEach((bullet) => {
-      bullet.draw();
-    });
-    this.clearBullets();
+  createAnimatedImage(imageName, imagePath, frames){
+    this[imageName] = new Image();
+    this[imageName].src = imagePath;
+    this[imageName].frames = frames;
+    this[imageName].framesIndex = 0;
   }
+  draw() {
+    this.bulletsFramesCounter ++
+     this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
+     this.drawDecidedSprite()
+     this.setCooldownSprite()
+     this.bullets.forEach((bullet) => {
+       bullet.draw();
+      });
+      this.clearBullets();
+    }
   shoot() {
-    this.bullets.push(
-      new Bullets(...this.info, this.sprite, this.direction)
-    );
+      this.shooting = true
+      this.bullets.push(
+        new Bullets(...this.info, this.sprite, this.direction)
+      );
+  }
+  setCooldownSprite(){
+    this.shootingTimeCounter ++
+    if(this.shootingTimeCounter === this.shootingTime){
+      this.shootingTimeCounter = 0
+      this.shooting = false
+    }
+  }
+  drawDecidedSprite(){
+    if (this.direction === "down") {
+      this.shooting ? this.drawAnimatedSprite("shootingDown") :this.drawSprite("down");
+    } else if (this.direction === "left") {
+       this.shooting ? this.drawAnimatedSprite("shootingLeft") :this.drawSprite("left");
+    } else if (this.direction === "right") {
+       this.shooting ? this.drawAnimatedSprite("shootingRight") :this.drawSprite("right");
+    } else if (this.direction === "up") {
+      this.shooting ? this.drawAnimatedSprite("shootingUp") :this.drawSprite("up");
+    }
+
   }
   clearBullets() {
     this.bullets = this.bullets.filter((bullet) => {
@@ -104,19 +132,15 @@ class Player {
       } else if (e.keyCode === this.key.right) {
         this.direction = "right";
       } else if (e.keyCode === this.key.space) {
-        this.shoot();
+        if(this.bulletsFramesCounter >= this.shootingTime){
+          this.shoot();
+          this.bulletsFramesCounter = 0
+        }
       }
     });
   }
-
-  // ninguna de las líneas de aquí para abajo se han implementado, tienen como objetivo
-  // que en el futuro se anime cuando dispare el jugador 
-  // habría que poner un temporizador para que aparezca animación
-  // asimismo queremos que tenga un "cooldown" entre disparos por lo que
-  // habría que poner otro counter. Las animaciones del jugador 
-  //dispando están en la carpeta "img/main-character/shooting"
   drawAnimatedSprite(imageName) {
-    this.animateImage(this.framesCounter, this[imageName], 5)
+    this.animateImage(this.framesCounter, this[imageName], 40)
      this.ctx.drawImage(
       this[imageName],
       (this[imageName].width / this[imageName].frames) * this[imageName].framesIndex,
@@ -125,8 +149,8 @@ class Player {
       this[imageName].height,
       this.posXY.x,
       this.posXY.y,
-      this.dimension.w,
-      this.dimension.h
+      this.size.w,
+      this.size.h
     );
   }
   resetFramesCounter(){
