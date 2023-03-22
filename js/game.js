@@ -8,7 +8,11 @@ class Game {
     this.background = undefined,
     this.zombies = []
     this.score = 0
+    this.waveCounter = 1
+    this.zombiesKilled = 0
     this.frameCounter = 0,
+    this.killsIncrease = 3
+    this.seconds = 180
     this.init();
   }
   init() {
@@ -22,12 +26,13 @@ class Game {
     this.background.draw();
     this.player.draw();
     this.drawScoreboard()
+    this.goToNextWave()
+    console.log(this.seconds)
     
-    if (this.frameCounter === 60) {
+    if (this.frameCounter === this.seconds) {
       this.createZombie();
       this.frameCounter = 0;
     }
-
     this.zombies.forEach((zombie) => {
         if(this.isColliding(zombie, this.player)){
           console.log("Has perdido")
@@ -39,6 +44,7 @@ class Game {
           // We remove the zombie, once it has been hit by a bullet
           this.zombies.splice(this.zombies.indexOf(zombie), 1)
           this.addPoints()
+          this.zombiesKilled ++
           //The bullet is removed once it has hit a zombie
           this.player.bullets.splice(this.player.bullets.indexOf(bullet),1)
         }
@@ -72,7 +78,7 @@ class Game {
     this.drawScoreBar()
     this.ctx.fillStyle = 'white'
     this.ctx.font = "20px sans-serif";
-    this.ctx.fillText(`Your score: ${this.score}`, 100, 50)
+    this.ctx.fillText(`Your score: ${this.score} wave ${this.waveCounter}`, 100, 50)
     this.ctx.fillStyle = 'black'
   }
   createScoreboard(){
@@ -81,5 +87,15 @@ class Game {
   }
   drawScoreBar(){
     this.ctx.drawImage(this.scoreBar, 5, 5, 350, 75)
+  }
+  goToNextWave(){
+    if(this.zombiesKilled === this.killsIncrease){
+      if(this.seconds > 40){
+        this.seconds -= 30 
+      }
+      this.waveCounter ++
+      this.zombiesKilled = 0
+      this.killsIncrease += 3
+    }
   }
 }
