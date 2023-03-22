@@ -64,7 +64,7 @@ class Player {
   }
   draw() {
     this.bulletsFramesCounter ++
-     this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
+    //  this.ctx.fillRect(this.sprite.posXY.x, this.sprite.posXY.y, this.sprite.size.w, this.sprite.size.h)
      this.drawDecidedSprite()
      this.setCooldownSprite()
      this.bullets.forEach((bullet) => {

@@ -13,6 +13,7 @@ class Game {
     this.frameCounter = 0,
     this.killsIncrease = 3
     this.seconds = 180
+    this.gameInstructions = gameInstructions
     this.init();
   }
   init() {
@@ -27,13 +28,9 @@ class Game {
     this.player.draw();
     this.drawScoreboard()
     this.goToNextWave()
-    console.log(this.seconds)
-    console.log(this.frameCounter)
     
-    if (this.frameCounter === this.seconds) {
-      this.createZombie();
-      this.frameCounter = 0;
-    }
+    this.createZombieByTime()
+    
     this.zombies.forEach((zombie) => {
         if(this.isColliding(zombie, this.player)){
           this.gameOver = true
@@ -88,9 +85,16 @@ class Game {
   drawScoreBar(){
     this.ctx.drawImage(this.scoreBar, 5, 5, 400, 75)
   }
+  createZombieByTime(){
+    if (this.frameCounter >= this.seconds) {
+      this.createZombie();
+      console.log('se ha creado un zombie', this.frameCounter)
+      this.frameCounter = 0;
+    }
+  }
   goToNextWave(){
     if(this.zombiesKilled === this.killsIncrease){
-      this.seconds > 40 ? this.seconds -= 30 : null
+      this.seconds >= 70 ? this.seconds -= 30 : null
       this.waveCounter ++
       this.zombiesKilled = 0
       this.killsIncrease += 3
