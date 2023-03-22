@@ -13,7 +13,7 @@ class Game {
     this.frameCounter = 0,
     this.killsIncrease = 3
     this.seconds = 180
-    this.gameInstructions = gameInstructions
+    
     this.init();
   }
   init() {

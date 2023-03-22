@@ -48,13 +48,13 @@ class Bullets{
     this.imageName.framesIndex = 0;
     }
     draw(){
-        this.ctx.fillStyle = 'black'
-        this.ctx.fillRect(
-          this.posXY.x ,
-          this.posXY.y , 
-          this.dimension.w, 
-          this.dimension.h,
-        );
+        // this.ctx.fillStyle = 'black'
+        // this.ctx.fillRect(
+        //   this.posXY.x ,
+        //   this.posXY.y , 
+        //   this.dimension.w, 
+        //   this.dimension.h,
+        // );
         this.resetFramesCounter()
         this.move()
         
@@ -115,20 +115,20 @@ class Bullets{
     }
     isUp(){
         this.posXY.y = this.playerSprite.posXY.y 
-        this.posXY.x = this.playerSprite.posXY.x + this.playerSprite.size.w/2
+        this.posXY.x = this.playerSprite.posXY.x + this.playerSprite.size.w/3
         this.sprite.posXY.y = this.playerSprite.posXY.y 
-        this.sprite.posXY.x = this.playerSprite.posXY.x + this.playerSprite.size.w/2
+        this.sprite.posXY.x = this.playerSprite.posXY.x + this.playerSprite.size.w/3
     }
     isDown(){ 
         this.posXY.y = this.playerSprite.posXY.y + this.playerSprite.size.h
-        this.posXY.x = this.playerSprite.posXY.x + this.playerSprite.size.w/2
+        this.posXY.x = this.playerSprite.posXY.x + this.playerSprite.size.w/4
         this.sprite.posXY.y = this.playerSprite.posXY.y + this.playerSprite.size.h
         this.sprite.posXY.x = this.playerSprite.posXY.x + this.playerSprite.size.w/2
         
     }
     isLeft(){
-        this.posXY.y = this.playerSprite.posXY.y + this.playerSprite.size.h/3
-        this.posXY.x = this.playerSprite.posXY.x 
+        this.posXY.y = this.playerSprite.posXY.y + this.playerSprite.size.h/3 -5
+        this.posXY.x = this.playerSprite.posXY.x - this.dimension.w
         this.sprite.posXY.y = this.playerSprite.posXY.y + this.playerSprite.size.h/2
         this.sprite.posXY.x = this.playerSprite.posXY.x 
         this.exchangeWidthAndHeight()
