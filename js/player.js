@@ -122,7 +122,6 @@ class Player {
   }
   listen() {
     document.addEventListener("keydown", (e) => {
-      console.log(e.keyCode);
       if (e.keyCode === this.key.up) {
         this.direction = "up";
       } else if (e.keyCode === this.key.down) {

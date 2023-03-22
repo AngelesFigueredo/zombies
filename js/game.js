@@ -28,6 +28,7 @@ class Game {
     this.drawScoreboard()
     this.goToNextWave()
     console.log(this.seconds)
+    console.log(this.frameCounter)
     
     if (this.frameCounter === this.seconds) {
       this.createZombie();
@@ -35,7 +36,6 @@ class Game {
     }
     this.zombies.forEach((zombie) => {
         if(this.isColliding(zombie, this.player)){
-          console.log("Has perdido")
           this.gameOver = true
         }
       //This is for any bullet-zombie collision
