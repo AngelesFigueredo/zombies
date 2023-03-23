@@ -121,6 +121,7 @@ class Player {
     this.ctx.drawImage(this[imageName], this.posXY.x, this.posXY.y, width, height);
   }
   listen() {
+    this.hearShot = new Audio ("../audio/9mm-pistol-shoot-short-reverb-7152.mp3")
     document.addEventListener("keydown", (e) => {
       if (e.keyCode === this.key.up) {
         this.direction = "up";
@@ -131,6 +132,7 @@ class Player {
       } else if (e.keyCode === this.key.right) {
         this.direction = "right";
       } else if (e.keyCode === this.key.space) {
+        this.hearShot.play()
         if(this.bulletsFramesCounter >= this.shootingTime){
           this.shoot();
           this.bulletsFramesCounter = 0

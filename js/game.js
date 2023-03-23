@@ -66,6 +66,7 @@ class Game {
     return false
   }
   isGameOver(){
+    this.music.pause()
     return this.gameOver
   }
   addPoints(){
