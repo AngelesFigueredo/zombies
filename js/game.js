@@ -66,11 +66,13 @@ class Game {
     return false
   }
   isGameOver(){
-    this.music.pause()
+    this.soundZombie.pause()
     return this.gameOver
+    
   }
   addPoints(){
     this.score+= 10
+    this.soundZombie.pause()
   }
   drawScoreboard(){
     this.drawScoreBar()
@@ -87,8 +89,10 @@ class Game {
     this.ctx.drawImage(this.scoreBar, 5, 5, 400, 75)
   }
   createZombieByTime(){
+    this.soundZombie = new Audio("../audio/soundZombie.mp3")
     if (this.frameCounter >= this.seconds) {
       this.createZombie();
+      this.soundZombie.play();
       console.log('se ha creado un zombie', this.frameCounter)
       this.frameCounter = 0;
     }
