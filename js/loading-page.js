@@ -19,7 +19,7 @@ class LoadingPage {
     this.ctx.drawImage(this.image, 0, 0, this.canvasWidth, this.canvasHeight);
   }
   listen() {
-    this.music = new Audio("../audio/burn-down-this-evil-house-epic-dark-horror-soundtrack-136332.mp3")
+    this.music = new Audio("audio/background-music.mp3")
     document.addEventListener("click", () => {
         this.onClick();
         this.music.play()

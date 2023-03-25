@@ -95,7 +95,7 @@ class Game {
     this.ctx.drawImage(this.scoreBar, 5, 5, 400, 75)
   }
   createZombieByTime(){
-    this.soundZombie = new Audio("../audio/soundZombie.mp3")
+    this.soundZombie = new Audio("audio/soundZombie.mp3")
     if (this.frameCounter >= this.seconds) {
       this.createZombie();
       this.soundZombie.play();

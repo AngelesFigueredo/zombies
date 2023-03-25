@@ -121,7 +121,7 @@ class Player {
     this.ctx.drawImage(this[imageName], this.posXY.x, this.posXY.y, width, height);
   }
   listen() {
-    this.hearShot = new Audio ("../audio/9mm-pistol-shoot-short-reverb-7152.mp3")
+    this.hearShot = new Audio ("audio/gun-shot.mp3")
     document.addEventListener("keydown", (e) => {
       if (e.keyCode === this.key.up) {
         this.direction = "up";
