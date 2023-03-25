@@ -24,15 +24,11 @@ class Zombie {
       posXY : {
         x: -this.size.w/2 , 
         y: - this.size.h/2 
-    }
-
+      }
     }
     this.vel = 2
-
+    
   }
- 
-  
-  
   drawSprite(imageName) {
     this.animateImage(this.framesCounter, this[imageName], 5)
      this.ctx.drawImage(

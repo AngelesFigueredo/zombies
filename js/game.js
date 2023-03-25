@@ -43,7 +43,9 @@ class Game {
             this.zombies.splice(this.zombies.indexOf(zombie), 1)
             this.addPoints()
             this.zombiesKilled ++
+
           }else{
+  
             zombie.dead = true
           }
           //The bullet is removed once it has hit a zombie

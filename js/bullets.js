@@ -24,7 +24,7 @@ class Bullets{
                 h: this.dimension.h
             }
         },
-        this.vel = 3
+        this.vel = 12
         
         this.init()
     }
