@@ -11,11 +11,11 @@ Single player game, the player must be able to shoot (click) and aim (arrows) an
 
 ## Backlog
 
--Create a loading screen, player rotation, zombies appear on screen
--Collision logic, zombies now appear randomly
--Sprites, background, gameover screen added
--Scoretable added, zombie waves logic implementation
--Audio implementation
+- Create a loading screen, player rotation, zombies appear on screen
+- Collision logic, zombies now appear randomly
+- Sprites, background, gameover screen added
+- Scoretable added, zombie waves logic implementation
+- Audio implementation
 
 ## Data structure
 
