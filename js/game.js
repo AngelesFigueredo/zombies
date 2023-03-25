@@ -39,9 +39,13 @@ class Game {
       this.player.bullets.forEach((bullet)=>{
         if(this.isColliding(bullet, zombie)){
           // We remove the zombie, once it has been hit by a bullet
-          this.zombies.splice(this.zombies.indexOf(zombie), 1)
-          this.addPoints()
-          this.zombiesKilled ++
+          if(zombie.dead){
+            this.zombies.splice(this.zombies.indexOf(zombie), 1)
+            this.addPoints()
+            this.zombiesKilled ++
+          }else{
+            zombie.dead = true
+          }
           //The bullet is removed once it has hit a zombie
           this.player.bullets.splice(this.player.bullets.indexOf(bullet),1)
         }
@@ -51,7 +55,7 @@ class Game {
     });
   }
   createZombie() {
-    this.zombies.push(new Zombie(...this.info));
+    this.zombies.push(this.decideZombieRandomly());
   }
   isColliding(obj1, obj2) {   
     if (
@@ -103,6 +107,16 @@ class Game {
       this.waveCounter ++
       this.zombiesKilled = 0
       this.killsIncrease += 3
+    }
+  }
+  decideZombieRandomly(){
+    const range = Math.floor(Math.random()*14)
+    if(range < 4){
+      return (new CopZombie(...this.info))
+    }else if(range < 10){
+       return (new NormalZombie(...this.info))
+    }else if(range < 15){
+       return (new ArmyZombie(...this.info))
     }
   }
 }
