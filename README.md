@@ -8,3 +8,9 @@ So grab your weapon and get ready to face the zombie apocalypse…Good luck!
 # MVP (DOM - CANVAS)
 Single player game, the player must be able to shoot (click) and aim (arrows) and combine them in order to kill all the zombies approaching
 ![game screenshoot](https://i.imgur.com/3ffLEd4.jpeg)
+
+#Backlog
+
+-Player rotation
+-Zombies appear on screen
+-
