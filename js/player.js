@@ -8,6 +8,8 @@ class Player {
       w: 200,
       h: 200,
     },
+    this.firstShot = false
+    this.canvasObject =  document.querySelector("canvas")
     this.framesCounter = 0
     this.bullets = [],
     this.direction = "down",
@@ -36,11 +38,15 @@ class Player {
         right: 39,
         space: 32,
       },
+    this.mouseCoordinates = {
+
+    }
     this.init();
   }
   init() {
     this.createAll();
     this.listen();
+    this.getCoordinates()
   }
   createAll() {
     this.createImage("up", "img/main-character/gun_up.png");
@@ -120,29 +126,9 @@ class Player {
     }
     this.ctx.drawImage(this[imageName], this.posXY.x, this.posXY.y, width, height);
   }
-  listen() {
-    this.hearShot = new Audio ("audio/gun-shot.mp3")
-    document.addEventListener("keydown", (e) => {
-      if (e.keyCode === this.key.up) {
-        this.direction = "up";
-      } else if (e.keyCode === this.key.down) {
-        this.direction = "down";
-      } else if (e.keyCode === this.key.left) {
-        this.direction = "left";
-      } else if (e.keyCode === this.key.right) {
-        this.direction = "right";
-      } else if (e.keyCode === this.key.space) {
-        this.hearShot.play()
-        if(this.bulletsFramesCounter >= this.shootingTime){
-          this.shoot();
-          this.bulletsFramesCounter = 0
-        }
-      }
-    });
-  }
   drawAnimatedSprite(imageName) {
     this.animateImage(this.framesCounter, this[imageName], 40)
-     this.ctx.drawImage(
+    this.ctx.drawImage(
       this[imageName],
       (this[imageName].width / this[imageName].frames) * this[imageName].framesIndex,
       0,
@@ -152,8 +138,8 @@ class Player {
       this.posXY.y,
       this.size.w,
       this.size.h
-    );
-  }
+      );
+    }
   resetFramesCounter(){
     this.framesCounter > 1000 ? (this.framesCounter = 0) : this.framesCounter++
   }
@@ -163,6 +149,44 @@ class Player {
     }
     if (image.framesIndex >= image.frames) {
       image.framesIndex = 0;
+    }
+  }
+  listen() {
+    this.hearShot = new Audio ("audio/gun-shot.mp3")
+    document.addEventListener("click", () => {
+        this.hearShot.play()
+        if(this.bulletsFramesCounter >= this.shootingTime){
+          this.shoot();
+          this.bulletsFramesCounter = 0
+        }
+    });
+  }
+  mousePos(canvas, e) {
+    let mouseCoor = canvas.getBoundingClientRect();
+    this.mouseCoordinates = { 
+      x: Math.round(e.clientX - mouseCoor.left),
+      y: Math.round(e.clientY - mouseCoor.top)
+    }
+  }
+  getCoordinates(){
+    document.addEventListener("mousemove",(e)=>{
+      this.mousePos(this.canvasObject, e)
+      this.determinedMousePos()
+    })
+  }
+  determinedMousePos(){
+    if(this.mouseCoordinates.y >= (-(this.canvasHeight/this.canvasWidth)*this.mouseCoordinates.x) + this.canvasHeight){
+      if(this.mouseCoordinates.y >= ((this.canvasHeight/this.canvasWidth)*this.mouseCoordinates.x)){
+        this.direction = "down";
+      }else{
+        this.direction = "right";
+    }
+    }else{
+      if(this.mouseCoordinates.y >= ((this.canvasHeight/this.canvasWidth)*this.mouseCoordinates.x)){
+        this.direction = "left";
+      }else{
+        this.direction = "up";
+      }
     }
   }
 }
