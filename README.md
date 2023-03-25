@@ -5,5 +5,5 @@ Welcome to Zombies, the ultimate test of your survival skills! In this intense g
 With each new wave of zombies comes a greater challenge, as the undead become stronger, faster, and more numerous. You'll need to use all your combat skills to stay alive!
 So grab your weapon and get ready to face the zombie apocalypse…Good luck!
 
-MVP (DOM - CANVAS)
+# MVP (DOM - CANVAS)
 Single player game, the player must be able to shoot (click) and aim (arrows) and combine them in order to kill all the zombies approaching
