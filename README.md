@@ -10,7 +10,7 @@ So grab your weapon and get ready to face the zombie apocalypse…Good luck!
 Single player game, the player must be able to shoot (by pressing space) and aim (by pressing the arrows) and combine them in order to kill all the zombies approaching.
 
 When the space is pressed, the player's character will shoot a bullet in the direction they are currently facing. The player will need to aim using the arrow keys to make sure they hit their target.
-![game screenshoot](https://i.imgur.com/KXfypEf.png)
+![game screenshoot](https://github.com/AngelesFigueredo/zombies/blob/main/img/game-screenshot.png)
 
 ## Backlog
 
@@ -22,131 +22,172 @@ When the space is pressed, the player's character will shoot a bullet in the dir
 
 ## Data structure
 
-### main.js
+### game.js
 
 ```
 class Game {
   constructor(ctx, canvasHeight, canvasWidth, gameOver) {
-    this.ctx = ctx,
-    this.canvasHeight = canvasHeight,
-    this.canvasWidth = canvasWidth,
-    this.gameOver = gameOver,
+    this.ctx;
+    this.canvasHeightht
+    this.canvasWidthh,
+    this.gameOver    
     this.info = [this.ctx, this.canvasHeight, this.canvasWidth],
-    this.background = undefined,
-    this.zombies = []
-    this.score = 0
-    this.waveCounter = 1
-    this.zombiesKilled = 0
-    this.frameCounter = 0,
-    this.killsIncrease = 3
-    this.seconds = 180
+    this.background
+    this.zombies
+    this.score
+    this.waveCounter
+    this.zombiesKilled
+    this.frameCounter 
+    this.killsIncrease
+    this.seconds 
     
-    this.init();
+    this.init(); 
   }
-  init() {
-    this.background = new Background(...this.info);
-    this.player = new Player(...this.info);
-    this.createZombie();
-    this.createScoreboard()
-  }
-  draw() {    
-    ++this.frameCounter;
-    this.background.draw();
-    this.player.draw();
-    this.drawScoreboard()
-    this.goToNextWave()
-    
-    this.createZombieByTime()
-    
-    this.zombies.forEach((zombie) => {
-        if(this.isColliding(zombie, this.player)){
-          this.gameOver = true
-        }
-      //This is for any bullet-zombie collision
-      this.player.bullets.forEach((bullet)=>{
-        if(this.isColliding(bullet, zombie)){
-          // We remove the zombie, once it has been hit by a bullet
-          if(zombie.dead){
-            this.zombies.splice(this.zombies.indexOf(zombie), 1)
-            this.addPoints()
-            this.zombiesKilled ++
-
-          }else{
   
-            zombie.dead = true
-          }
-          //The bullet is removed once it has hit a zombie
-          this.player.bullets.splice(this.player.bullets.indexOf(bullet),1)
-        }
-      })
+  //Initializes the game
+  init(), 
+  draw()
+  
+   //Returns true once it has been hit by a bullet, then zombie and bullet are removed from the game.
+      this.player.bullets.forEach((bullet)=>{})
       zombie.draw();
       
-    });
-  }
-  createZombie() {
-    this.zombies.push(this.decideZombieRandomly());
-  }
-  isColliding(obj1, obj2) {   
-    if (
-      obj1.sprite.posXY.x < obj2.sprite.posXY.x + obj2.sprite.size.w &&
-      obj1.sprite.posXY.x + obj1.sprite.size.w > obj2.sprite.posXY.x &&
-      obj1.sprite.posXY.y < obj2.sprite.posXY.y + obj2.sprite.size.h &&
-      obj1.sprite.size.h + obj1.sprite.posXY.y > obj2.sprite.posXY.y
-    ) {
-      
-      return true
-    }
-    return false
-  }
-  isGameOver(){
-    this.soundZombie.pause()
-    return this.gameOver
-    
-  }
-  addPoints(){
-    this.score+= 10
-    this.soundZombie.pause()
-  }
-  drawScoreboard(){
-    this.drawScoreBar()
-    this.ctx.fillStyle = 'white'
-    this.ctx.font = "20px sans-serif";
-    this.ctx.fillText(`Your score: ${this.score} Wave: ${this.waveCounter}`, 100, 50)
-    this.ctx.fillStyle = 'black'
-  }
-  createScoreboard(){
-    this.scoreBar = new Image()
-    this.scoreBar.src = "img/score-bar.png"
-  }
-  drawScoreBar(){
-    this.ctx.drawImage(this.scoreBar, 5, 5, 400, 75)
-  }
-  createZombieByTime(){
-    this.soundZombie = new Audio("audio/soundZombie.mp3")
-    if (this.frameCounter >= this.seconds) {
-      this.createZombie();
-      this.soundZombie.play();
-      console.log('se ha creado un zombie', this.frameCounter)
-      this.frameCounter = 0;
-    }
-  }
-  goToNextWave(){
-    if(this.zombiesKilled === this.killsIncrease){
-      this.seconds >= 70 ? this.seconds -= 30 : null
-      this.waveCounter ++
-      this.zombiesKilled = 0
-      this.killsIncrease += 3
-    }
-  }
-  decideZombieRandomly(){
-    const range = Math.floor(Math.random()*14)
-    if(range < 4){
-      return (new CopZombie(...this.info))
-    }else if(range < 10){
-       return (new NormalZombie(...this.info))
-    }else if(range < 15){
-       return (new ArmyZombie(...this.info))
-    }
-  }
+  //Adds zombies from a random position to the game    
+  createZombie() 
+  
+  //Returns true if two objetcs are in the same position. 
+  isColliding(obj1, obj2) 
+  
+  //Ends the game if zombie and played collide
+  isGameOver()
+  //Add 10 points once a bulltes hits the zombie
+  addPoints()
+  drawScoreboard()
+  createScoreboard()
+  drawScoreBar()
+  //Sets zombies spawn
+  createZombieByTime()
+  //Increases zombie spawn depending on your score
+  goToNextWave()
+  decideZombieRandomly()
+```
+### apps.js
 ```
 
+const zombies = {
+  canvas
+  ctx
+  authors
+  width: 
+  height: 
+  FPS;
+  framesCounter
+  gameOver
+  background
+  player
+  obstacles
+  
+  //Initializes the game and sets dimensions
+  startGame(),
+
+  init() {
+    this.canvas 
+    this.ctx 
+    this.setDimensions();
+    this.start();
+    this.LoadingPage 
+    );
+    this.game
+    this.createGameOverImage();
+    
+  },
+  
+  setDimensions() {
+    
+  
+  start(),
+  clear()
+  drawAll() 
+  // Setting game state. End Game.
+  showGameOver()
+  reset()
+```
+### player.js
+```
+class Player {
+  constructor(ctx, canvasHeight, canvasWidth) {
+    this.ctx;
+    this.canvasHeight;
+    this.canvasWidth;
+    this.info = [this.ctx, this.canvasHeight, this.canvasWidth],
+    this.size;
+    },
+    this.framesCounter;
+    this.bullets;
+    this.direction;
+    this.shooting;
+    this.shootingTime;
+    this.bulletsFramesCounter;
+    this.shootingTimeCounter;
+    this.posXY;
+    this.sprite;
+    this.key = {
+        up: 38,
+        down: 40,
+        left: 37,
+        right: 39,
+        space: 32,
+      },
+    this.init();
+  }
+  init() 
+  //Draws the player depending on its position and action wether is shooting or not
+  createAll() 
+  createImage(imageName, imagePath) 
+  }
+  createAnimatedImage(imageName, imagePath, frames)
+  
+  // Draws and clear bullets image
+  draw() 
+  //Sets shooting action, adds bullets to an array and sets shooting cooldown and direction
+  shoot() 
+  }
+  setCooldownSprite()
+  }
+  // Draws an object depending on its position
+  drawDecidedSprite()
+  
+  //Sets the bullets remove
+  clearBullets();
+  
+  drawSprite(imageName)
+  
+  //Creates audio when the player shoots and creates shooting action
+  
+  listen();
+  
+  //Animates the player image
+  drawAnimatedSprite(imageName)
+  resetFramesCounter()
+  animateImage(framesCounter, image, speed) 
+  
+  //Calls mouseover in order to set the mouse coordinates
+  getCoordinates()
+```
+## States y States Transitions
+
+## Links
+### Trello
+
+[Link url](https://trello.com/b/QGzs8d48/game-project)
+
+### Git
+
+URls for the project repo and deploy
+[Link Repo](https://github.com/AngelesFigueredo/zombies) || 
+[Link Deploy](https://angelesfigueredo.github.io/zombies/)
+
+### Slides
+
+URls for the project presentation (PowerPoint)
+[Link PowerPoint](https://github.com/AngelesFigueredo/zombies/blob/main/Presentaci%C3%B3n%20juego%20zombie.pptx)
