@@ -7,9 +7,9 @@ So grab your weapon and get ready to face the zombie apocalypse…Good luck!
 
 ## MVP (DOM - CANVAS)
 
-Single player game, the player must be able to shoot (by left click) and aim (by mouse) and combine them in order to kill all the zombies approaching.
+Single player game, the player must be able to shoot (by click) and aim (by mouse) and combine them in order to kill all the zombies approaching.
 
-When the space is pressed, the player's character will shoot a bullet in the direction they are currently facing. The player will need to aim using the arrow keys to make sure they hit their target.
+When the left mouse button is pressed, the player's character will shoot a bullet in the direction they are currently facing. The player will need to aim using the mouse to make sure they hit their target.
 ![game screenshoot](https://github.com/AngelesFigueredo/zombies/blob/main/img/game-screenshot.png)
 
 ## Backlog
