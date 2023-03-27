@@ -1,6 +1,6 @@
 # Zombies
 
-Description
+
 Welcome to Zombies, the ultimate test of your survival skills! In this intense game, your goal is to survive as long as possible against hordes of bloodthirsty zombies. Armed only with your trusty weapon, you must fend off a variety of zombie types that will appear randomly throughout the game.
 With each new wave of zombies comes a greater challenge, as the undead become stronger, faster, and more numerous. You'll need to use all your combat skills to stay alive!
 So grab your weapon and get ready to face the zombie apocalypse…Good luck!
@@ -177,9 +177,7 @@ class Player {
 ## States y States Transitions
 
 ## Links
-### Trello
 
-[Link url](https://trello.com/b/QGzs8d48/game-project)
 
 ### Git
 
@@ -187,7 +185,7 @@ URls for the project repo and deploy
 [Link Repo](https://github.com/AngelesFigueredo/zombies) || 
 [Link Deploy](https://angelesfigueredo.github.io/zombies/)
 
-### Slides
+### PowerPoint
 
 URls for the project presentation (PowerPoint)
 [Link PowerPoint](https://github.com/AngelesFigueredo/zombies/blob/main/Presentaci%C3%B3n%20juego%20zombie.pptx)
