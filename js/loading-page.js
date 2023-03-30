@@ -23,7 +23,6 @@ class LoadingPage {
     document.addEventListener("click", () => {
         this.onClick();
         this.music.play()
-        // this.music.pause()
     });
   }
 }
