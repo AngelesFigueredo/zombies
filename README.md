@@ -4,7 +4,7 @@
 Welcome to Zombies, the ultimate test of your survival skills! In this intense game, your goal is to survive as long as possible against hordes of bloodthirsty zombies. Armed only with your trusty weapon, you must fend off a variety of zombie types that will appear randomly throughout the game.
 With each new wave of zombies comes a greater challenge, as the undead become stronger, faster, and more numerous. You'll need to use all your combat skills to stay alive!
 So grab your weapon and get ready to face the zombie apocalypse…Good luck!
-#[PLAY NOW](https://angelesfigueredo.github.io/zombies/)
+[PLAY NOW](https://angelesfigueredo.github.io/zombies/)
 
 
 ## MVP (DOM - CANVAS)
